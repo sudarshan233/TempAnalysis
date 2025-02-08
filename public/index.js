@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const apiKey = '101d39fb96bf58bdf736f4a7767b5175';
+let weatherData = null;
 
 function setupFormSubmission() {
     document.querySelector("form").addEventListener("submit", (event) => {
@@ -20,6 +21,9 @@ function setupFormSubmission() {
         var city = document.getElementById("cityName").value;
         var phone = document.getElementById("phoneModel").value;
 
+        weatherData = getWeatherData(city);
+        displayWeatherData(weatherData);
+        
         localStorage.setItem("username", username);
         localStorage.setItem("cityName", city);
         localStorage.setItem("phoneModel", phone);
@@ -64,7 +68,52 @@ function populateDetails()
 
 async function getWeatherData(city)
 {
-    
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    const response = await fetch(apiUrl);
+    if(!response.ok)
+    {
+        throw new Error('Could not fetch weather data');
+    }
+    return await response.json;
+}
+
+function displayWeatherData(data)
+{
+    const {main: {temp, humidity}, 
+        weather: [{description, id}]} = data;
+
+    document.querySelector('.card-1 .tempDisplay').innerText = `${(temp - 273.15).toFixed(1)}°C`;
+    document.querySelector('.humidityDisplay').innerText = `Humidity: ${humidity}%`;
+    document.querySelector('.card-1 .description').innerText = description;
+    var logo = getWeatherLogo(id);
+    document.querySelector('.weatherLogo').innerText = logo;
+}
+
+function getWeatherLogo(id)
+{
+    switch(true)
+    {
+        case (id >= 200 && id < 300):
+            return "⛈️";
+        
+        case (id >= 300 && id < 400):
+            return "🌦️";
+
+        case (id >= 500 && id < 600):
+            return "🌧️";
+        
+        case (id >= 600 && id < 700):
+            return "❄️";
+
+        case (id >= 700 && id < 800):
+            return "🌫️";
+
+        case (id === 800):
+            return "☀️";
+
+        case (id >= 801 && id < 810):
+            return "☁️";
+    }
 }
 
 function fetchBatteryTemp()
