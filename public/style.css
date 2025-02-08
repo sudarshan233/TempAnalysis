@@ -25,6 +25,12 @@ p
     margin: 5rem;
 }
 
+.greeting
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .container
 {
     display: flex;
@@ -63,8 +69,8 @@ p
 {   
     font-size: 6rem;
     position: absolute;
-    bottom: 26rem;
-    left: 17rem;
+    bottom: 10rem;
+    left: 15rem;
 
     margin: 0px;
     height: 0;
@@ -95,15 +101,15 @@ p
     padding: 2em;
 
     border-radius: 0.5rem;
-    min-width: 370px;
+    min-width: 350px;
 }
 
 .batteryLogo
 {   
     font-size: 6rem;
     position: absolute;
-    bottom: 26rem;
-    left: 20rem;
+    bottom: 10rem;
+    left: 10rem;
 
     margin: 0px;
     height: 0;
