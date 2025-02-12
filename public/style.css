@@ -49,7 +49,7 @@ p
     padding: 2em;
 
     border-radius: 0.5rem;
-    min-width: 350px;
+    min-width: 300px;
 }
 
 .tempDisplay
@@ -70,7 +70,7 @@ p
     font-size: 6rem;
     position: absolute;
     bottom: 10rem;
-    left: 15rem;
+    left: 14rem;
 
     margin: 0px;
     height: 0;
@@ -101,7 +101,7 @@ p
     padding: 2em;
 
     border-radius: 0.5rem;
-    min-width: 350px;
+    min-width: 300px;
 }
 
 .batteryLogo
@@ -182,7 +182,7 @@ form
 #analyze
 {
     height: 70px;
-    width: 150px;
+    width: 280px;
 
     border: 2px solid rgb(0, 136, 255);
     padding: 20px;
@@ -215,5 +215,5 @@ form
     background-color: rgb(0, 136, 255);
 
     height: 80px;
-    width: 160px;
+    width: 290px;
 }  
