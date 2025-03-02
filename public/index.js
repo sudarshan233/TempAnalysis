@@ -93,7 +93,7 @@ function displayWeatherData() {
 
     document.querySelector('.card-1 .tempDisplay').innerText = `${(temp - 273.15).toFixed(1)}°C`;
     document.querySelector('.humidityDisplay').innerText = `Humidity: ${humidity}%`;
-    document.querySelector('.card-1 .description').innerText = description;
+    document.querySelector('.card-1 .description').innerText = description.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
     document.querySelector('.weatherLogo').innerText = getWeatherLogo(id);
 }
 

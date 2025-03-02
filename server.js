@@ -23,11 +23,13 @@ app.get('/main', (req, res) => {
 });
 
 app.post('/battery', (req, res) => {
-    const battery = req.body;
-    batteryTemp = battery.temperature;
-    console.log(batteryTemp);
-    // var batteryTemp = JSON.parse(battery);
-    // console.log(batteryTemp);
+    async function getBatteryData() 
+    {
+        const battery = req.body;
+        batteryTemp = battery.temperature;
+        console.log(batteryTemp);    
+    }
+    getBatteryData()
     res.send(`Temperature of the battery in the smartphone: ${batteryTemp}`);
 });
 
