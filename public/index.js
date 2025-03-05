@@ -129,6 +129,7 @@ function fetchBatteryTemp()
     fetch('/battery')
         .then(response => response.json())
         .then(data => {
+            localStorage.setItem('batteryTemperature', data.temperature);
             document.querySelector('.card-2 .tempDisplay').innerText = `${data.temperature}°C`;
             if(data.temperature < 40 && data.temperature >= 25)
             {
@@ -163,4 +164,18 @@ function fetchBatteryTemp()
     
         })
         .catch(err => console.error('Error fetching', err));
+}
+function createLineChart()
+{
+    const canvas = document.getElementById('lineChart').getContext('2d');
+    const chart = {
+        labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        datasets: [
+            {
+                label: 'Local Temperature',
+                data: localStorage.getItem("weatherData")
+
+            }
+        ]
+    }
 }
