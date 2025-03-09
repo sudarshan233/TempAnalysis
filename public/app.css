@@ -45,7 +45,7 @@ p
 
     border-radius: 0.5rem;
 
-    max-width: 400px;
+    min-width: 300px;
 }
 
 .tempDisplay
@@ -104,7 +104,7 @@ p
     padding: 2em;
 
     border-radius: 0.5rem;
-    max-width: 300px;
+    min-width: 300px;
 }
 
 .batteryLogo
@@ -112,7 +112,7 @@ p
     font-size: 6rem;
     position: absolute;
     bottom: 10rem;
-    left: 12rem;
+    left: 8rem;
 
     margin: 0px;
     height: 0;

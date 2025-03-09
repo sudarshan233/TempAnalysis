@@ -1,20 +1,20 @@
-document.addEventListener("DOMContentLoaded", () => {
-    if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
-        setupFormSubmission();
-    }
+// document.addEventListener("DOMContentLoaded", () => {
+//     if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
+//         setupFormSubmission();
+//     }
 
-    if (window.location.pathname.includes("main.html")) {
-        greetUser();
-        populateDetails();
-        displayWeatherData();
-        fetchBatteryTemp();
-    }
-});
+//     if (window.location.pathname.includes("main.html")) {
+//         greetUser();
+//         populateDetails();
+//         displayWeatherData();
+//         fetchBatteryTemp();
+//     }
+// });
 
 const apiKey = '101d39fb96bf58bdf736f4a7767b5175';
 let weatherData = null;
 
-function setupFormSubmission() {
+export function setupFormSubmission() {
     document.querySelector("form").addEventListener("submit", async (event) => {
         event.preventDefault();
         
@@ -26,6 +26,11 @@ function setupFormSubmission() {
         localStorage.setItem("cityName", city);
         localStorage.setItem("phoneModel", phone);
         // localStorage.clear()
+        const userInfo = { 
+            "username" : username,
+            "city" : city,
+            "phone" : phone
+        }
 
         try {
             weatherData = await getWeatherData(city);
@@ -33,12 +38,11 @@ function setupFormSubmission() {
         } catch (err) {
             console.error("Error fetching weather data:", err);
         }
-
-        window.location.href = "main.html";
+        return JSON.stringify(userInfo);
     });
 }
 
-function greetUser()
+export function greetUser()
 {
     const time = new Date().getHours();
     var name = localStorage.getItem('username');
@@ -65,13 +69,13 @@ function greetUser()
     document.querySelector('.greeting').innerText = greet;
 }
 
-function populateDetails()
+export function populateDetails()
 {
     document.querySelector('.cityDisplay').innerText = localStorage.getItem('cityName');
     document.querySelector('.phoneDisplay').innerText = localStorage.getItem('phoneModel');
 }   
 
-async function getWeatherData(city)
+export async function getWeatherData(city)
 {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     const response = await fetch(apiUrl);
@@ -82,7 +86,7 @@ async function getWeatherData(city)
     return await response.json();
 }
 
-function displayWeatherData() {
+export function displayWeatherData() {
     const weatherData = JSON.parse(localStorage.getItem("weatherData"));
     if (!weatherData) {
         console.error("No weather data found");
@@ -97,7 +101,7 @@ function displayWeatherData() {
     document.querySelector('.weatherLogo').innerText = getWeatherLogo(id);
 }
 
-function getWeatherLogo(id)
+export function getWeatherLogo(id)
 {
     switch(true)
     {

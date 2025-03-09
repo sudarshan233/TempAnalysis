@@ -4,6 +4,8 @@ import bodyParser from 'body-parser';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+import { setupFormSubmission, greetUser, populateDetails, getWeatherData, displayWeatherData, getWeatherLogo } from './public/index.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let batteryTemp = null;
 
@@ -19,7 +21,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/main', (req, res) => {
+    const userInfo = req.body;
+    console.log(userInfo);
     res.sendFile(__dirname + '/public/main.html');
+    
+    // greetUser();
+    // populateDetails();
+    // getWeatherData(city);
+    // displayWeatherData();
+    // getWeatherLogo(id)
 });
 
 app.post('/battery', (req, res) => {
@@ -27,7 +37,9 @@ app.post('/battery', (req, res) => {
     {
         const battery = req.body;
         batteryTemp = battery.temperature;
-        console.log(batteryTemp);    
+        console.log(batteryTemp);
+        
+        console.log(localWeatherData); 
     }
     getBatteryData()
     res.send(`Temperature of the battery in the smartphone: ${batteryTemp}`);
