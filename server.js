@@ -3,8 +3,10 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import request from 'request';
 import fetch from 'node-fetch';
+
+import { insertValues } from './database/database.js';
+import { findInterval, findDay } from './public/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let batteryTemp = null, userInfo = null, userName = null, cityName = null, phoneModel = null;
@@ -44,6 +46,21 @@ async function getWeatherData(city)
     }
 }
 
+async function sendtoDatabase()
+{
+    var interval = await findInterval();
+    var day = await findDay();
+    console.log(interval);
+    const sendData = {
+        Intervals: interval,
+        ReadingsDay: day,
+        City: cityName,
+        BatteryTemperature: batteryTemp,
+        LocalTemperature: weatherData.temperature
+    }
+    await insertValues(sendData);
+}
+
 const app = express();
 app.use(express.static(__dirname + '/public'));
 
@@ -68,17 +85,18 @@ app.post('/userInfo', async (req, res) => {
     phoneModel = userInfo.phone;
 
     await getWeatherData(cityName);
+    await sendtoDatabase();
     res.sendFile(__dirname + '/public/main.html');
 });
 
-app.post('/battery', (req, res) => {
+app.post('/battery', async (req, res) => {
     async function getBatteryData() 
     {
         const battery = req.body;
         batteryTemp = battery.temperature;
         console.log(batteryTemp);    
     }
-    getBatteryData()
+    await getBatteryData();
     res.send(`Temperature of the battery in the smartphone: ${batteryTemp}`);
 });
 

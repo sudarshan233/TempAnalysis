@@ -1,10 +1,8 @@
-var userName = null, cityName = null;
-
-function greetUser(userName)
+function greetUser()
 {
     const time = new Date().getHours();
-    var name = localStorage.getItem('username');
     var greet;
+    var name = localStorage.getItem('userName');
     if(time < 12)
     {
         greet = `Good Morning ${name},`;
@@ -95,7 +93,7 @@ function displayWeatherData(data) {
         return;
     }
     console.log("In display function: ", weatherData);
-    userName = weatherData.username;
+    localStorage.setItem("userName", weatherData.username);
     
     document.querySelector('.card-1 .cityDisplay').innerText = weatherData.city;
     document.querySelector('.card-1 .tempDisplay').innerText = `${(weatherData.temperature - 273.15).toFixed(1)}°C`;
@@ -130,6 +128,78 @@ function getWeatherLogo(id)
             return "☁️";
     }
 }
+
+export async function findInterval()
+{
+    var interval = null; 
+    const time = new Date().getHours();
+    if(time < 12)
+    {
+        interval = "Morning"
+    }
+    
+    else if(time > 12 && time < 18)
+    {
+        interval = "Afternoon";
+    }
+    
+    else if(time === 12)
+    {
+        interval = "Noon";
+    }
+    
+    else if(time === 18 || time > 18)
+    {
+        interval = "Evening"
+    }
+    return interval;
+}
+
+export async function findDay()
+{
+    var day = null; 
+    const time = new Date().getHours();
+    switch(day)
+    {
+        case 0:
+        {
+            day = 'Sunday';
+            break;
+        }
+        case 1:
+        {
+            day = 'Monday';
+            break;
+        }
+        case 2:
+        {
+            day = 'Tuesday';
+            break;
+        }
+        case 3:
+        {
+            day = 'Wednesday';
+            break;
+        }
+        case 4:
+        {
+            day = 'Thursday';
+            break;
+        }
+        case 5:
+        {
+            day = 'Friday';
+            break;
+        }
+        case 6:
+        {
+            day = 'Saturday';
+            break;
+        }
+    }
+    
+    return day;
+}
 fetchBatteryTemp();
 fetchWeatherData();
-greetUser(userName);
+greetUser();
