@@ -6,11 +6,82 @@ import { fileURLToPath } from 'url';
 import fetch from 'node-fetch';
 
 import { insertValues } from './database/database.js';
-import { findInterval, findDay } from './public/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let batteryTemp = null, userInfo = null, userName = null, cityName = null, phoneModel = null;
 var weatherData = null;
+
+
+async function findInterval()
+{
+    var interval = null; 
+    const time = new Date().getHours();
+    if(time < 12)
+    {
+        interval = "Morning"
+    }
+    
+    else if(time > 12 && time < 18)
+    {
+        interval = "Afternoon";
+    }
+    
+    else if(time === 12)
+    {
+        interval = "Noon";
+    }
+    
+    else if(time === 18 || time > 18)
+    {
+        interval = "Evening"
+    }
+    return interval;
+}
+
+async function findDay()
+{
+    var day = new Date().getDay(); 
+    switch(day)
+    {
+        case 0:
+        {
+            day = 'Sunday';
+            break;
+        }
+        case 1:
+        {
+            day = 'Monday';
+            break;
+        }
+        case 2:
+        {
+            day = 'Tuesday';
+            break;
+        }
+        case 3:
+        {
+            day = 'Wednesday';
+            break;
+        }
+        case 4:
+        {
+            day = 'Thursday';
+            break;
+        }
+        case 5:
+        {
+            day = 'Friday';
+            break;
+        }
+        case 6:
+        {
+            day = 'Saturday';
+            break;
+        }
+    }
+    
+    return day;
+}
 
 async function getWeatherData(city)
 {
