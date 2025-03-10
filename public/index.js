@@ -1,5 +1,3 @@
-var userName = null, cityName = null;
-
 function greetUser()
 {
     const time = new Date().getHours();
@@ -95,7 +93,7 @@ function displayWeatherData(data) {
         return;
     }
     console.log("In display function: ", weatherData);
-    userName = localStorage.setItem('userName', weatherData.username);
+    localStorage.setItem('userName', weatherData.username);
     
     document.querySelector('.card-1 .cityDisplay').innerText = weatherData.city;
     document.querySelector('.card-1 .tempDisplay').innerText = `${(weatherData.temperature - 273.15).toFixed(1)}°C`;
