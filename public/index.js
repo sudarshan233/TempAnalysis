@@ -1,9 +1,9 @@
 var userName = null, cityName = null;
 
-function greetUser(userName)
+function greetUser()
 {
     const time = new Date().getHours();
-    var name = localStorage.getItem('username');
+    var name = localStorage.getItem('userName');
     var greet;
     if(time < 12)
     {
@@ -95,7 +95,7 @@ function displayWeatherData(data) {
         return;
     }
     console.log("In display function: ", weatherData);
-    userName = weatherData.username;
+    userName = localStorage.setItem('userName', weatherData.username);
     
     document.querySelector('.card-1 .cityDisplay').innerText = weatherData.city;
     document.querySelector('.card-1 .tempDisplay').innerText = `${(weatherData.temperature - 273.15).toFixed(1)}°C`;
@@ -132,4 +132,4 @@ function getWeatherLogo(id)
 }
 fetchBatteryTemp();
 fetchWeatherData();
-greetUser(userName);
+greetUser();
