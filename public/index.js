@@ -93,7 +93,7 @@ function displayWeatherData(data) {
         return;
     }
     console.log("In display function: ", weatherData);
-    localStorage.setItem('userName', weatherData.username);
+    localStorage.setItem("userName", weatherData.username);
     
     document.querySelector('.card-1 .cityDisplay').innerText = weatherData.city;
     document.querySelector('.card-1 .tempDisplay').innerText = `${(weatherData.temperature - 273.15).toFixed(1)}°C`;
@@ -128,6 +128,7 @@ function getWeatherLogo(id)
             return "☁️";
     }
 }
+
 fetchBatteryTemp();
 fetchWeatherData();
 greetUser();
