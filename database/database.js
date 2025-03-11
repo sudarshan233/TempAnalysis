@@ -7,9 +7,6 @@ const pool = mysql.createPool({
     database: "tempanalysis"
 }).promise()
 
-const result = await pool.query("SELECT * FROM temperature")
-console.log(result);
-
 export async function insertValues(data) {
     var interval = data.Intervals;
     var readingsDay = data.ReadingsDay;
@@ -26,4 +23,10 @@ export async function insertValues(data) {
         ) values (?, ?, ?, ?, ?)`,
         [interval, readingsDay, city, BatteryTemperature, LocalTemperature]
     )
+}
+
+export async function retrieveDataset() {
+    var dataset = await pool.query(`select * from temperature`);
+    console.log(dataset[0]);
+    return dataset[0];
 }
