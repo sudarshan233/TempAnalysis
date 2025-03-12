@@ -17,6 +17,7 @@
     "mysql2": "^3.13.0",
     "node-fetch": "^3.3.2",
     "node-localstorage": "^3.0.5",
+    "ollama": "^0.5.14",
     "request": "^2.88.2"
   }
 }

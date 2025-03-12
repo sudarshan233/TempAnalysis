@@ -5,11 +5,12 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fetch from 'node-fetch';
 
-import { insertValues } from './database/database.js';
+import { insertValues, retrieveDataset } from './database/database.js';
+import { run } from './models/ollama-mistral.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let batteryTemp = null, userInfo = null, userName = null, cityName = null, phoneModel = null;
-var weatherData = null;
+var weatherData = null, dataset = null;
 
 
 async function findInterval()
@@ -156,8 +157,14 @@ app.post('/userInfo', async (req, res) => {
     phoneModel = userInfo.phone;
 
     await getWeatherData(cityName);
-    await sendtoDatabase();
+    // await sendtoDatabase();
     res.sendFile(__dirname + '/public/main.html');
+});
+
+app.post('/predict', async(req, res) => {
+    dataset = await retrieveDataset();
+    run(dataset);
+    res.sendFile(__dirname + '/public/predict.html');
 });
 
 app.post('/battery', async (req, res) => {
