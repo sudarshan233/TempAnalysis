@@ -27,3 +27,12 @@ export async function insertValues(data) {
         [interval, readingsDay, city, BatteryTemperature, LocalTemperature]
     )
 }
+
+export async function retrieveDataset() {
+
+    const [rows] = await pool.query(`select Intervals, ReadingsTime, ReadingsDay, 
+        City, BatteryTemperature, LocalTemperature`);
+    
+    return rows;
+    
+}
