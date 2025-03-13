@@ -27,9 +27,16 @@ export async function run(dataset)
         Day at which the readings were taken, City in which the local 
         temperature readings were taken and the temperature of the battery of my
         smartphone whose values are ${intervals}, ${readingsTime}, ${readingsDay}, 
-        ${city}, ${batteryTemperature}, ${localTemperature} respectively. Your
-        response must be of the format "predicted value°C". No other ` }]
+        ${city}, ${batteryTemperature}, ${localTemperature} respectively. The output
+        should be in the format {predicted°C} temperature}` }]
       })
       
     console.log(response.message.content)
+    const result = response.message.content;
+    const match = result.match(/([\d.]+)°C/);
+
+    if(match)
+        console.log("Ambient Temperature:", match[1],"°C");
+    else
+        console.log("No match found");
 }

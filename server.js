@@ -157,7 +157,7 @@ app.post('/userInfo', async (req, res) => {
     phoneModel = userInfo.phone;
 
     await getWeatherData(cityName);
-    // await sendtoDatabase();
+    await sendtoDatabase();
     res.sendFile(__dirname + '/public/main.html');
 });
 

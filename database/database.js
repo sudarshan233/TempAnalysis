@@ -7,8 +7,7 @@ const pool = mysql.createPool({
     database: "tempanalysis"
 }).promise()
 
-const result = await pool.query("SELECT * FROM temperature")
-console.log(result);
+
 
 export async function insertValues(data) {
     var interval = data.Intervals;
