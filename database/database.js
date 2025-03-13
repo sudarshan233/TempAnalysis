@@ -7,8 +7,6 @@ const pool = mysql.createPool({
     database: "tempanalysis"
 }).promise()
 
-
-
 export async function insertValues(data) {
     var interval = data.Intervals;
     var readingsDay = data.ReadingsDay;
