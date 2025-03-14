@@ -10,7 +10,7 @@ import { run } from './models/ollama-mistral.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let batteryTemp = null, userInfo = null, userName = null, cityName = null, phoneModel = null;
-var weatherData = null, dataset = null;
+var weatherData = null, dataset = null, predicted = null;;
 
 
 async function findInterval()
@@ -157,22 +157,27 @@ app.post('/userInfo', async (req, res) => {
     phoneModel = userInfo.phone;
 
     await getWeatherData(cityName);
-    await sendtoDatabase();
+    // await sendtoDatabase();
     res.sendFile(__dirname + '/public/main.html');
 });
 
-app.post('/predict', async(req, res) => {
+app.post('/predict', async(req, res) => 
+{
     dataset = await retrieveDataset();
-    run(dataset);
-    res.sendFile(__dirname + '/public/predict.html');
+    predicted = await run(dataset);
 });
+
+app.get('/predict', async(req, res) => 
+{
+    res.json(predicted);
+});  
 
 app.post('/battery', async (req, res) => {
     async function getBatteryData() 
     {
         const battery = req.body;
         batteryTemp = battery.temperature;
-        console.log(batteryTemp);    
+        // console.log(batteryTemp);    
     }
     await getBatteryData();
     res.send(`Temperature of the battery in the smartphone: ${batteryTemp}`);

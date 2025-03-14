@@ -129,6 +129,28 @@ function getWeatherLogo(id)
     }
 }
 
+function fetchAmbientTemperature()
+{
+    fetch('/predict')
+        .then(response => {
+            console.log("Ambient Temperature Status: ", response.status);
+            if(!response.ok)
+            {
+                console.log(`Error in fetching predicted ambient 
+                    temperature data.`);
+            }
+            return response.json;
+        })
+        .then(data => {
+            console.log(`Predicted ambient temperature data in front-end:
+                ${data}`);
+        })
+        .catch(err => {
+            console.error(`Error fetching data from Backend ${err}`);
+        })
+}
+
 fetchBatteryTemp();
 fetchWeatherData();
 greetUser();
+fetchAmbientTemperature();

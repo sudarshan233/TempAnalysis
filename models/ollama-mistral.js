@@ -33,10 +33,13 @@ export async function run(dataset)
       
     console.log(response.message.content)
     const result = response.message.content;
-    const match = result.match(/([\d.]+)°C/);
+    var match = "Value not predited. Try Again!!";
+    match = result.match(/([\d.]+)°C/);
 
     if(match)
         console.log("Ambient Temperature:", match[1],"°C");
     else
         console.log("No match found");
+    
+    return match[1];
 }
