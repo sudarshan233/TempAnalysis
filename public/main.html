@@ -10,28 +10,49 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    
 </head>
 <body>
     <h1 class="greeting"></h1>
-    <div class="container">
+    <canvas id="graph" width="0" height="0" display = "none"></canvas>
+    <div class="container-1">
         <div class="card-1">
+            <p class="duration"></p>
             <h1 class="cityDisplay"></h1>
             <p class="tempDisplay"></p>
-            <p class="duration">Today</p>
             <p class="humidityDisplay"></p>
             <p class="description"></p>
             <p class="weatherLogo"></p>
         </div>
 
         <div class="card-2">
+            <p class = "duration"></p>
             <h1 class="phoneDisplay"></h1>
             <p class="tempDisplay"></p>
-            <p class = "duration">Today</p>
             <p class="description"></p>
             <p class="batteryLogo"></p>
         </div>
+
+        <div class="card-3" style="display: none;">
+            <p class="duration"></p>
+            <h1 class="cityDisplay">Chennai</h1>
+            <p class="ambientDisplay"></p>
+            <p class="description"></p>
+            <p class="mini-description"></p>
+        </div>
     </div>
+
+    <div class="container-2">
+        <form action='/predict' method="post">
+            <input type="text" name="prompt" id="prompt" placeholder="What would you like to talk about?">
+            <input type="submit" id="predict" value="➡️">
+        </form>
+    </div>
+
+
     <script src="index.js"></script>
 </body>
 </html>

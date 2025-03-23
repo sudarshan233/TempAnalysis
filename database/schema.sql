@@ -8,6 +8,7 @@ create table temperature(
     ReadingsDay varchar(10), 
     City varchar(100),
     BatteryTemperature decimal(3,1),
-    LocalTemperature decimal(3, 1)
+    LocalTemperature decimal(3, 1),
+    AmbientTemperature decimal(3, 1)
 );
 

@@ -5,11 +5,14 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fetch from 'node-fetch';
 
-import { insertValues } from './database/database.js';
+
+import { insertValues, retrieveDataset, retrieveAmbient } from './database/database.js';
+import { getPrediction } from './models/Llama-3.2-3B.js';
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let batteryTemp = null, userInfo = null, userName = null, cityName = null, phoneModel = null;
-var weatherData = null;
+var weatherData = null, dataset = null, predicted = null;
 
 
 async function findInterval()
@@ -156,9 +159,22 @@ app.post('/userInfo', async (req, res) => {
     phoneModel = userInfo.phone;
 
     await getWeatherData(cityName);
-    await sendtoDatabase();
+    if (!weatherData) {
+        return res.status(500).json({ error: "Weather data could not be fetched" });
+    }
+    // await sendtoDatabase();
     res.sendFile(__dirname + '/public/main.html');
 });
+
+app.post('/predict', async (req, res) => {
+    dataset = await retrieveDataset();
+    // console.log(dataset);
+    var prompt = req.body.prompt;
+    // console.log(prompt);
+    console.log('Sending a dataset and prompt to Llama-3.2-3B.js');
+    const result = await getPrediction(dataset, prompt);
+    console.log('Received the prediction by server: \n', result);
+})
 
 app.post('/battery', async (req, res) => {
     async function getBatteryData() 

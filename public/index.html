@@ -28,5 +28,45 @@
             <input type="submit" value="Check Temperature" id="analyze">
         </form>
     </div>
+
+    <script>
+        var time = new Date().getHours();
+
+        if(time === 18 || time > 18)
+        {
+            document.querySelector('body').style.backgroundColor = '#1E201E';
+            document.querySelector('body').style.color = 'whitesmoke';
+
+            document.querySelector('form').style.backgroundColor = '#3C3D37';
+
+            document.querySelector('#userName').style.backgroundColor = '#1E201E';
+            document.querySelector('#userName').style.color = 'white';
+
+            document.querySelector('#cityName').style.backgroundColor = '#1E201E';
+            document.querySelector('#cityName').style.color = 'white';
+
+            document.querySelector('#phoneModel').style.backgroundColor = '#1E201E';
+            document.querySelector('#phoneModel').style.color = 'white';
+
+            document.querySelector('#analyze').style.backgroundColor = '#1E201E';
+            document.querySelector('#analyze').style.color = 'whitesmoke';
+            document.querySelector('#analyze').style.border = '3px solid rgb(0, 71, 171)';
+            document.querySelector('#analyze').addEventListener('mouseover', buttonTransitionOn);
+            document.querySelector('#analyze').addEventListener('mouseout', buttonTransitionOff);
+
+            function buttonTransitionOn()
+            {
+                document.querySelector('#analyze').style.backgroundColor = 'rgb(0, 71, 171)';
+                document.querySelector('#analyze').style.color = 'whitesmoke';
+            }
+
+            function buttonTransitionOff()
+            {
+                document.querySelector('#analyze').style.backgroundColor = '#3C3D37';
+                document.querySelector('#analyze').style.color = 'whitesmoke';
+                document.querySelector('#analyze').style.border = '3px solid rgb(0, 71, 171)';
+            }
+        }
+    </script>
 </body>
 </html>
