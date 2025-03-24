@@ -28,24 +28,24 @@ export async function insertValues(data) {
 
 export async function retrieveDataset() {
 
-    const [Intervals] = await pool.query(`select Intervals from temperature`);
-    const [ReadingsTime] = await pool.query(`select ReadingsTime from temperature`);
-    const [ReadingsDay] = await pool.query(`select ReadingsDay from temperature`);
-    const [City] = await pool.query(`select City from temperature`);
-    const [BatteryTemperature] = await pool.query(`select BatteryTemperature from temperature`);
-    const [LocalTemperature] = await pool.query(`select LocalTemperature from temperature`);
+    // const [Intervals] = await pool.query(`select Intervals from temperature`);
+    // const [ReadingsTime] = await pool.query(`select ReadingsTime from temperature`);
+    // const [ReadingsDay] = await pool.query(`select ReadingsDay from temperature`);
+    // const [City] = await pool.query(`select City from temperature`);
+    // const [BatteryTemperature] = await pool.query(`select BatteryTemperature from temperature`);
+    // const [LocalTemperature] = await pool.query(`select LocalTemperature from temperature`);
     
-    const rows = [];
-    for (let index = 0; index < Intervals.length; index++) {
-        const row = [];
-        row.push(Intervals[index]);
-        row.push(ReadingsTime[index]);
-        row.push(ReadingsDay[index]);
-        row.push(City[index]);
-        row.push(BatteryTemperature[index]);
-        row.push(LocalTemperature[index]);
-        rows.push(row);
-    }
+    // const rows = [];
+    // for (let index = 0; index < Intervals.length; index++) {
+    //     const row = [];
+    //     row.push(Intervals[index]);
+    //     row.push(ReadingsTime[index]);
+    //     row.push(ReadingsDay[index]);
+    //     row.push(City[index]);
+    //     row.push(BatteryTemperature[index]);
+    //     row.push(LocalTemperature[index]);
+    //     rows.push(row);
+    // }
     // const rows = {
     //     intervalsRow: Intervals,
     //     readingsTimeRow: ReadingsTime,
@@ -54,12 +54,11 @@ export async function retrieveDataset() {
     //     batteryTempRow: BatteryTemperature,
     //     localTemp: LocalTemperature  
     // }
-    // const [rows] = await pool.query(`select Intervals, ReadingsTime, ReadingsDay, City,
-    //     BatteryTemperature, LocalTemperature from temperature`);
+    const [rows] = await pool.query(`select Intervals, ReadingsTime, ReadingsDay, City,
+        BatteryTemperature, LocalTemperature from temperature`);
     console.log(rows);
     return rows;
 }
-retrieveDataset();
 
 async function fillAmbient()
 {
@@ -85,6 +84,6 @@ async function fillAmbient()
 export async function retrieveAmbient() {
 
     const [rows] = await pool.query(`select AmbientTemperature, ReadingsDay from temperature`);
-    console.log(rows);
+    // console.log(rows);
     return rows;
 }

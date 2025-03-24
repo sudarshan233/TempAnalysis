@@ -263,50 +263,50 @@ function getWeatherLogo(id)
     }
 }
 
-// function getDescription(ambient)
-// {
-//     const result = [];
-//     console.log(ambient);
-//     switch(true)
-//     {
-//         case (ambient >= 0.0 && ambient < 10.0):
-//             result.push("Freezing Cold");
-//             result.push("Extremely Cold, Frostbite Risk");
-//             break;
+function getDescription(ambient)
+{
+    const result = [];
+    console.log(ambient);
+    switch(true)
+    {
+        case (ambient >= 0.0 && ambient < 10.0):
+            result.push("Freezing Cold");
+            result.push("Extremely Cold, Frostbite Risk");
+            break;
         
-//         case (ambient >= 10.0 && ambient < 15.0):
-//             result.push("Very Cold");
-//             result.push("Requires Heavy Clothing");
-//             break;
+        case (ambient >= 10.0 && ambient < 15.0):
+            result.push("Very Cold");
+            result.push("Requires Heavy Clothing");
+            break;
 
-//         case (ambient >= 15.0 && ambient < 20.0):
-//             result.push("Cold");
-//             result.push("Chilly, Manageable with warm clothing");
-//             break;
+        case (ambient >= 15.0 && ambient < 20.0):
+            result.push("Cold");
+            result.push("Chilly, Manageable with warm clothing");
+            break;
         
-//         case (ambient >= 20.0 && ambient < 30.0):
-//             result.push("Mild / Comfortable");
-//             result.push("Ideal Indoor and Outdoor Temperature");
-//             break;
+        case (ambient >= 20.0 && ambient < 30.0):
+            result.push("Mild / Comfortable");
+            result.push("Ideal Indoor and Outdoor Temperature");
+            break;
 
-//         case (ambient >= 30.0 && ambient < 35.0):
-//             result.push("Warm");
-//             result.push("Slightly Hot, Comfortable");
-//             break;
+        case (ambient >= 30.0 && ambient < 35.0):
+            result.push("Warm");
+            result.push("Slightly Hot, Comfortable");
+            break;
 
-//         case (ambient >= 35.0 && ambient < 40.0):
-//             result.push("Very Hot");
-//             result.push("Risk Of Dehydration, Possible Heat Exhaustion");
-//             break;
+        case (ambient >= 35.0 && ambient < 40.0):
+            result.push("Very Hot");
+            result.push("Risk Of Dehydration, Possible Heat Exhaustion");
+            break;
 
-//         case (ambient >= 40.0):
-//             result.push("Extreme Heat");
-//             result.push("Dangerous, Heastroke Risk");
-//             break;
+        case (ambient >= 40.0):
+            result.push("Extreme Heat");
+            result.push("Dangerous, Heastroke Risk");
+            break;
             
-//     }
-//     return result;
-// }
+    }
+    return result;
+}
 
 // function fetchAmbientTemperature() {
 //     fetch('/predict', { method: "POST" })
@@ -376,12 +376,10 @@ function getWeatherLogo(id)
 //             {
 //                 card3.style.backgroundColor = '#3C3D37';
 //             }
-
-//             card3.querySelector('.duration').innerText = `${findNextDay()} (Tomorrow)`;
+//             ccard3.querySelector('.duration').innerText = `${findNextDay()} (Tomorrow)`;
 //             card3.querySelector('.ambientDisplay').innerText = `${ambientTemp}°C`;
 //             card3.querySelector('.description').innerText = `${description[0]}`;
 //             card3.querySelector('.mini-description').innerText = `${description[1]}`;
-
 //             createGraph();
 //         })
 //         .catch(err => {
@@ -390,73 +388,72 @@ function getWeatherLogo(id)
 //         });
 // }
 
-// function createGraph()
-// {
-//     document.querySelector('#graph').setAttribute('width', '400');
-//     document.querySelector('#graph').setAttribute('height', '300');
-//     document.querySelector('#graph').style.marginBottom = "11rem";
+function createGraph()
+{
+    document.querySelector('#graph').setAttribute('width', '400');
+    document.querySelector('#graph').setAttribute('height', '300');
+    document.querySelector('#graph').style.marginBottom = "9rem";
 
-//     const canvas = document.getElementById('graph').getContext('2d');
-//     // console.log(ambients);
-//     console.log(ambientTemp);
-//     const graphAmbient = new Chart(canvas, {
-//         type: 'line',
-//         data: {
-//             labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-//             datasets: [{
-//                 label: 'Ambient Temperature',
-//                 data: ambients,
-//                 borderColor: 'rgb(0, 71, 171)',
-//                 tension: 0.1
-//             }, {
-//                 label: 'Predicted Ambient Temperature',
-//                 data: predictedDays,
-//                 borderColor: 'red',
-//                 pointBackgroundColor: 'silver',
-//                 pointBorderColor: 'red',
-//                 pointStyle: 'triangle',
-//                 pointRadius: 10,
-//                 fill: false
-//             }]
-//         },
-//         options: {
-//             scales: {
-//                 x: {
-//                     grid: {
-//                         color: 'grey'
-//                     }
-//                 },
-//                 y: {
-//                     grid: {
-//                         color: 'grey'
-//                     },
-//                     beginAtZero: false, // Prevents y-axis from starting at 0
-//                     min: 20, // Adjust to your minimum y-axis value
-//                     max: 32 // Adjust to your maximum y-axis value
-//                 }
-//             }
-//         }
-//     });
-//     function changeTheme()
-//     {
-//         graphAmbient.options.scales.x.grid.color = "silver";
-//         graphAmbient.options.scales.x.ticks.color = 'silver';
-//         graphAmbient.options.scales.y.grid.color = "silver";
-//         graphAmbient.options.scales.y.ticks.color = 'silver';
-//         graphAmbient.options.plugins.legend.labels.color = 'white';
-//         graphAmbient.update();
-//     }
-//     if(time === 18 || time > 18)
-//     {
-//         changeTheme();
-//     }
-// }
+    const canvas = document.getElementById('graph').getContext('2d');
+    console.log(ambients);
+    console.log(ambientTemp);
+    const graphAmbient = new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            datasets: [{
+                label: 'Ambient Temperature',
+                data: ambients,
+                borderColor: 'rgb(0, 71, 171)',
+                tension: 0.1
+            }, {
+                label: 'Predicted Ambient Temperature',
+                data: predictedDays,
+                borderColor: 'red',
+                pointBackgroundColor: 'silver',
+                pointBorderColor: 'red',
+                pointStyle: 'triangle',
+                pointRadius: 10,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        color: 'grey'
+                    }
+                },
+                y: {
+                    grid: {
+                        color: 'grey'
+                    },
+                    beginAtZero: false, // Prevents y-axis from starting at 0
+                    min: 20, // Adjust to your minimum y-axis value
+                    max: 32 // Adjust to your maximum y-axis value
+                }
+            }
+        }
+    });
+    function changeTheme()
+    {
+        graphAmbient.options.scales.x.grid.color = "silver";
+        graphAmbient.options.scales.x.ticks.color = 'silver';
+        graphAmbient.options.scales.y.grid.color = "silver";
+        graphAmbient.options.scales.y.ticks.color = 'silver';
+        graphAmbient.options.plugins.legend.labels.color = 'white';
+        graphAmbient.update();
+    }
+    if(time === 18 || time > 18)
+    {
+        changeTheme();
+    }
+}
 
-fetchBatteryTemp();
-fetchWeatherData();
-greetUser();
+// fetchBatteryTemp();
+// fetchWeatherData();
+// greetUser();
 
-document.querySelector('.card-3').style.display = "none";
 
 // document.addEventListener('DOMContentLoaded', function() {
 //     document.querySelector('#predict').addEventListener("click", function(event) {
@@ -464,7 +461,110 @@ document.querySelector('.card-3').style.display = "none";
 //         console.log("Predict button clicked!");
 //         fetchAmbientTemperature();
 //     });
-// })
+// });
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('#predict').addEventListener("click", function(event) {
+        event.preventDefault();
+        console.log("Predict button clicked!");
+        console.log("Predict button clicked!");
+        
+        // Get the prompt data from the form (replace with your actual form element)
+        const promptInput = document.querySelector('#prompt'); // Replace with your input's ID
+        const prompt = promptInput.value;
 
+        // Send the prompt data to the server using fetch
+        fetch('/predict', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ prompt: prompt })
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error || 'Failed to fetch ambient temperature');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // ... (Your existing code to process the data and create the graph)
+            if (!data || !data.ambientTemperature) {
+                console.error("No ambient temperature received!");
+                document.querySelector('.card-3').style.display = "none";
+                return;
+            }
+            
+            console.log("Ambient Temperature Data:", data.ambientTemperature[0], typeof data.ambientTemperature[0]);
+            ambientTemp = parseFloat(data.ambientTemperature[0]).toFixed(1); // Parse the first element
+            const temp = data.ambients;
+            console.log("Data from /predict:", data);
+            console.log("Predicted Value: ", ambientTemp);
+            console.log("Ambients array: ", temp);
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            ambients = []; // Clear the ambients array before populating
+            predictedDays = [null, null, null, null, null, null, null]; // Reset the array
 
+            //Function to display the predicted day value in graph
+            var day = new Date().getDay();
+            var nextDay = (day + 1) % 7;
+            predictedDays[nextDay] = parseFloat(ambientTemp); // Set the next day's predicted temperature
+
+            // Function to aggregate the ambient temperature of each day
+            for (let index = 0; index < days.length; index++) {
+                const day = days[index];
+                let count = 0;
+                let sum = 0.0;
+
+                for (let j = 0; j < temp.length; j++) {
+                    const ambient = temp[j];
+                    if (ambient.ReadingsDay === day) {
+                        const temperature = parseFloat(ambient.AmbientTemperature); // Parse to float
+                        if (!isNaN(temperature)) {
+                            count++;
+                            sum += temperature;
+                        } else {
+                            console.error("Invalid temperature value:", ambient.AmbientTemperature);
+                        }
+                    }
+                }
+
+                if (count > 0) {
+                    ambients.push((sum / count).toFixed(1)); // Store average as number
+                } else {
+                    ambients.push(null); // Store null for missing data
+                }
+            }
+
+            console.log("List of ambients: ", ambients);
+            var description = getDescription(ambientTemp);
+
+            console.log("Received Predicted Ambient Temperature:", ambientTemp);
+
+            let card3 = document.querySelector('.card-3');
+            card3.style.display = "block";
+            if (time === 18 || time > 18) {
+                card3.style.backgroundColor = '#3C3D37';
+            }
+            card3.querySelector('.duration').innerText = `${findNextDay()} (Tomorrow)`;
+            card3.querySelector('.ambientDisplay').innerText = `${ambientTemp}°C`;
+            card3.querySelector('.description').innerText = `${description[0]}`;
+            card3.querySelector('.mini-description').innerText = `${description[1]}`;
+            document.querySelector('.response').style.display = "block";
+            document.querySelector('.response').innerText = `${data.promptResponse}`
+            createGraph();
+        })
+        .catch(err => {
+            console.error("Error fetching data from Backend:", err);
+            document.querySelector('.card-3').style.display = "none";
+        });
+    });
+});
+
+fetchBatteryTemp();
+fetchWeatherData();
+greetUser();
+
+document.querySelector('.card-3').style.display = "none";
+document.querySelector('.response').style.display = "none";

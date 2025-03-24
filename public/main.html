@@ -17,7 +17,16 @@
 </head>
 <body>
     <h1 class="greeting"></h1>
+    <div class="container-2">
+        <form action="/predict" method="post">
+            <input type="text" name="prompt" id="prompt" placeholder="What would you like to talk about?">
+            <input type="submit" id="predict" value="➡️">
+        </form>
+        <div class="response"></div>
+    </div>
+    
     <canvas id="graph" width="0" height="0" display = "none"></canvas>
+
     <div class="container-1">
         <div class="card-1">
             <p class="duration"></p>
@@ -44,14 +53,6 @@
             <p class="mini-description"></p>
         </div>
     </div>
-
-    <div class="container-2">
-        <form action='/predict' method="post">
-            <input type="text" name="prompt" id="prompt" placeholder="What would you like to talk about?">
-            <input type="submit" id="predict" value="➡️">
-        </form>
-    </div>
-
 
     <script src="index.js"></script>
 </body>

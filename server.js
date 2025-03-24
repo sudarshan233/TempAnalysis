@@ -135,6 +135,30 @@ async function sendtoDatabase()
     await insertValues(sendData);
 }
 
+async function extractAmbient(ambient) {
+    try {
+        if (typeof ambient === 'object' && ambient !== null && ambient.ambientTemperature && ambient.ambientTemperature.length > 0) {
+            // It's a JSON object with ambientTemperature
+            return ambient.ambientTemperature; // Return the array of ambient temperatures
+        } else if (typeof ambient === 'string') {
+            // It's a string, use regex
+            const temperatureRegex = /Predicted Ambient Temperature:\s*(\d+(\.\d+)?)°?C?/i;
+            const match = ambient.match(temperatureRegex);
+
+            if (match && match[1]) {
+                return [parseFloat(match[1])]; // Return as an array for consistency
+            } else {
+                return null;
+            }
+        } else {
+            return null; // Handle other cases or errors
+        }
+    } catch (error) {
+        console.error("Error extracting ambient temperature:", error);
+        return null;
+    }
+}
+
 const app = express();
 app.use(express.static(__dirname + '/public'));
 
@@ -162,18 +186,31 @@ app.post('/userInfo', async (req, res) => {
     if (!weatherData) {
         return res.status(500).json({ error: "Weather data could not be fetched" });
     }
-    // await sendtoDatabase();
+    await sendtoDatabase();
     res.sendFile(__dirname + '/public/main.html');
 });
 
 app.post('/predict', async (req, res) => {
-    dataset = await retrieveDataset();
-    // console.log(dataset);
-    var prompt = req.body.prompt;
-    // console.log(prompt);
-    console.log('Sending a dataset and prompt to Llama-3.2-3B.js');
-    const result = await getPrediction(dataset, prompt);
-    console.log('Received the prediction by server: \n', result);
+    try{
+        console.log("Headers:", req.headers);
+        console.log("Received body:", req.body);
+        dataset = await retrieveDataset();
+        // console.log(dataset);
+        var prompt = req.body.prompt;
+        console.log(prompt);
+        console.log('Sending a dataset and prompt to Llama-3.2-3B.js');
+        const predicted = await getPrediction(dataset, prompt);
+        const result = await extractAmbient(predicted);
+        const ambientList = await retrieveAmbient();
+        res.json({
+            ambientTemperature: result,
+            ambients: ambientList,
+            promptResponse: predicted
+        });
+    } catch (err) {
+        console.error("Prediction error:", err);
+        return res.status(500).json({ error: "Internal server error" });
+    }
 })
 
 app.post('/battery', async (req, res) => {
