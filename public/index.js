@@ -1,8 +1,8 @@
 var ambientTemp = null;
 var ambients = [];
 var predictedDays = [null, null, null, null, null, null, null];
-var time = new Date().getHours();
-// var time = 21;
+// var time = new Date().getHours();
+var time = 21;
 
 function setTheme()
 {
@@ -19,6 +19,9 @@ function setTheme()
         document.querySelector('#predict').style.border = '3px solid rgb(0, 71, 171)';
         document.querySelector('#predict').addEventListener('mouseover', buttonTransitionOn);
         document.querySelector('#predict').addEventListener('mouseout', buttonTransitionOff);
+
+        document.querySelector('#prompt').style.backgroundColor = '#3C3D37';
+        document.querySelector('#prompt').style.color = 'whitesmoke';
     }
 }
 
@@ -544,15 +547,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let card3 = document.querySelector('.card-3');
             card3.style.display = "block";
+            document.querySelector('.response').style.display = "block";
+            document.querySelector('.response').innerText = `${data.promptResponse}`
             if (time === 18 || time > 18) {
                 card3.style.backgroundColor = '#3C3D37';
+                document.querySelector('.response').style.backgroundColor = '#3C3D37';
             }
             card3.querySelector('.duration').innerText = `${findNextDay()} (Tomorrow)`;
             card3.querySelector('.ambientDisplay').innerText = `${ambientTemp}°C`;
             card3.querySelector('.description').innerText = `${description[0]}`;
             card3.querySelector('.mini-description').innerText = `${description[1]}`;
-            document.querySelector('.response').style.display = "block";
-            document.querySelector('.response').innerText = `${data.promptResponse}`
             createGraph();
         })
         .catch(err => {

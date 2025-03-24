@@ -186,7 +186,7 @@ app.post('/userInfo', async (req, res) => {
     if (!weatherData) {
         return res.status(500).json({ error: "Weather data could not be fetched" });
     }
-    await sendtoDatabase();
+    // await sendtoDatabase();
     res.sendFile(__dirname + '/public/main.html');
 });
 
